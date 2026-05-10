@@ -1228,7 +1228,6 @@ async function testApiKey() {
     if (!lr.ok) { const e = await lr.json(); showToast('❌ Clave inválida: ' + (e.error?.message||'')); return; }
     const data = await lr.json();
     const candidates = ['gemini-2.0-flash','gemini-2.0-flash-lite','gemini-1.5-flash','gemini-1.5-flash-8b'].map(mn => ({name:'models/'+mn}));
-    let found = null;
     let found = null, lastErr = '';
     for (const m of candidates) {
       const mn = m.name.replace('models/','');
@@ -1241,6 +1240,7 @@ async function testApiKey() {
       lastErr = mn + ': ' + (e.error?.status||'') + ' ' + (e.error?.message||'').slice(0,50);
     }
     if (!found) { showToast('❌ ' + lastErr); return; }
+    const p = getProfile(); p.apikey = key; p._model = found; DB.set('profile', p);
     document.getElementById('pf-apikey').value = key;
     showToast('✅ Modelo encontrado: ' + found);
   } catch(err) { showToast('❌ ' + err.message); }
