@@ -1229,6 +1229,7 @@ async function testApiKey() {
     const data = await lr.json();
     const candidates = ['gemini-2.0-flash','gemini-2.0-flash-lite','gemini-1.5-flash','gemini-1.5-flash-8b'].map(mn => ({name:'models/'+mn}));
     let found = null;
+    let found = null, lastErr = '';
     for (const m of candidates) {
       const mn = m.name.replace('models/','');
       const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mn}:generateContent?key=${key}`, {
@@ -1236,9 +1237,10 @@ async function testApiKey() {
         body: JSON.stringify({contents:[{parts:[{text:'Hi'}]}]})
       });
       if (r.ok) { found = mn; break; }
+      const e = await r.json();
+      lastErr = mn + ': ' + (e.error?.status||'') + ' ' + (e.error?.message||'').slice(0,50);
     }
-    if (!found) { showToast('❌ Ningún modelo gratuito disponible con esta clave'); return; }
-    const p = getProfile(); p.apikey = key; p._model = found; DB.set('profile', p);
+    if (!found) { showToast('❌ ' + lastErr); return; }
     document.getElementById('pf-apikey').value = key;
     showToast('✅ Modelo encontrado: ' + found);
   } catch(err) { showToast('❌ ' + err.message); }
