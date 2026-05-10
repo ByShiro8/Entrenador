@@ -139,6 +139,21 @@
   .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-80px); background: var(--green); color: #fff; border-radius: 30px; padding: 10px 20px; font-size: 14px; font-weight: 700; z-index: 500; transition: transform .3s; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* CHAT */
+  .chat-messages { padding: 12px 16px; display: flex; flex-direction: column; gap: 12px; }
+  .chat-bubble { max-width: 82%; border-radius: 18px; padding: 10px 14px; font-size: 14px; line-height: 1.5; }
+  .chat-bubble.user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .chat-bubble.ai { background: var(--surface); border: 1px solid var(--border); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .chat-bubble.ai b { color: #a5b4fc; }
+  .chat-bubble.typing { opacity: .6; font-style: italic; }
+  .chat-input-bar { position: fixed; bottom: var(--nav-h); left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); display: flex; gap: 8px; align-items: flex-end; z-index: 90; }
+  .chat-input-bar textarea { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text); font-size: 14px; padding: 10px 14px; resize: none; outline: none; font-family: inherit; max-height: 120px; line-height: 1.4; }
+  .chat-input-bar textarea:focus { border-color: var(--accent); }
+  .chat-send-btn { width: 40px; height: 40px; border-radius: 20px; background: var(--accent); color: #fff; border: none; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity .15s; }
+  .chat-send-btn:disabled { opacity: .4; }
+  .chat-ctx-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--muted); font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+  #page-chat { padding-bottom: calc(var(--nav-h) + 72px); }
+
   /* EMPTY STATE */
   .empty { text-align: center; padding: 48px 20px; }
   .empty-icon { font-size: 48px; margin-bottom: 16px; }
@@ -405,6 +420,24 @@
   </div>
 </div>
 
+<!-- CHAT PAGE -->
+<div id="page-chat" class="page">
+  <div class="page-header">
+    <div class="page-title">Asistente IA 🤖</div>
+    <div class="page-sub">Pregunta sobre nutrición, recetas o entrenamientos</div>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+</div>
+
+<!-- CHAT INPUT BAR (fixed, only visible on chat page) -->
+<div id="chat-input-bar" class="chat-input-bar" style="display:none">
+  <button class="chat-ctx-btn" onclick="sendChatContext()" title="Enviar resumen del día">📊</button>
+  <textarea id="chat-textarea" placeholder="Escribe tu pregunta..." rows="1" oninput="autoResizeChat(this)" onkeydown="chatKeyDown(event)"></textarea>
+  <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+  </button>
+</div>
+
 <!-- NAV BAR -->
 <nav class="nav">
   <button class="nav-btn active" onclick="switchPage('dashboard')" id="nav-dashboard">
@@ -425,6 +458,11 @@
   <button class="nav-btn" onclick="switchPage('historial')" id="nav-historial">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     Historial
+    <div class="dot"></div>
+  </button>
+  <button class="nav-btn" onclick="switchPage('chat')" id="nav-chat">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    IA
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('perfil')" id="nav-perfil">
@@ -607,11 +645,13 @@ function switchPage(id) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   document.getElementById('nav-' + id).classList.add('active');
+  document.getElementById('chat-input-bar').style.display = id === 'chat' ? 'flex' : 'none';
   if (id === 'dashboard') renderDashboard();
   if (id === 'entreno') renderWorkoutsPage();
   if (id === 'nutricion') renderNutritionPage();
   if (id === 'historial') renderHistoryPage();
   if (id === 'perfil') loadProfile();
+  if (id === 'chat') initChat();
 }
 
 // ─── CHIPS ────────────────────────────────────────────────────────────────────
@@ -1088,12 +1128,7 @@ async function scanFoodLabel(id, file) {
       document.getElementById('fc-'+id).value = parseFloat(json.carb || 0).toFixed(1);
       document.getElementById('ff-'+id).value = parseFloat(json.fat || 0).toFixed(1);
       updateMealTotals();
-      // Auto-save to catalog (per 100g)
-      if (json.nombre) {
-        addToCatalog(json.nombre, per100.kcal, per100.prot, per100.carb, per100.fat);
-        document.querySelectorAll('[id^="catalog-"]').forEach(el => renderCatalogSection(el.id.replace('catalog-','')));
-      }
-      showToast('✅ Etiqueta leída y guardada en catálogo');
+      showToast('✅ Etiqueta leída');
     }
   } catch(e) {
     showToast('❌ ' + e.message);
@@ -1327,6 +1362,166 @@ function applyPhotoBg(name) {
   s.backgroundRepeat = 'no-repeat';
   document.body.classList.add('has-bg');
 }
+// ─── CHAT IA ──────────────────────────────────────────────────────────────────
+let chatHistory = []; // [{role:'user'|'model', parts:[{text:''}]}]
+let chatReady = false;
+
+function initChat() {
+  if (chatReady) return;
+  chatReady = true;
+  const p = getProfile();
+  const greeting = p.name ? `¡Hola ${p.name}!` : '¡Hola!';
+  appendChatBubble('ai', `${greeting} 👋 Soy tu asistente de fitness y nutrición. Puedo ayudarte con:\n\n• **Recetas** según los alimentos que tengas\n• **Consejos de entrenamiento** y ejercicios\n• **Dudas sobre nutrición** y macros\n• **Planificación** de comidas o rutinas\n\nToca el botón 📊 para enviarme tu resumen del día y te doy recomendaciones personalizadas.`);
+}
+
+function appendChatBubble(role, text) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-bubble ' + role;
+  div.innerHTML = formatChatText(text);
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return div;
+}
+
+function formatChatText(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^• /gm,'• ')
+    .replace(/\n/g,'<br>');
+}
+
+function autoResizeChat(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function chatKeyDown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChatMessage(); }
+}
+
+async function sendChatMessage() {
+  const ta = document.getElementById('chat-textarea');
+  const text = ta.value.trim();
+  if (!text) return;
+  ta.value = '';
+  ta.style.height = 'auto';
+  const btn = document.getElementById('chat-send-btn');
+  btn.disabled = true;
+
+  appendChatBubble('user', text);
+  chatHistory.push({ role: 'user', parts: [{ text }] });
+
+  const typing = appendChatBubble('ai', '...');
+  typing.classList.add('typing');
+
+  try {
+    const reply = await callGeminiChat();
+    typing.remove();
+    appendChatBubble('ai', reply);
+    chatHistory.push({ role: 'model', parts: [{ text: reply }] });
+  } catch(e) {
+    typing.remove();
+    appendChatBubble('ai', '❌ Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function callGeminiChat() {
+  const apikey = getProfile().apikey;
+  const model = getProfile()._model || 'gemini-2.5-flash';
+
+  const systemInstruction = buildChatSystemPrompt();
+
+  const body = {
+    system_instruction: { parts: [{ text: systemInstruction }] },
+    contents: chatHistory
+  };
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apikey}`,
+    { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }
+  );
+  if (!res.ok) { const e = await res.json(); throw new Error((e.error?.message || 'Error API').slice(0,80)); }
+  const data = await res.json();
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  if (!text) throw new Error('Respuesta vacía');
+  return text.trim();
+}
+
+function buildChatSystemPrompt() {
+  const p = getProfile();
+  const today = getToday();
+  const meals = getMeals().filter(m => m.date === today);
+  const workouts = getWorkouts().filter(w => w.date === today);
+
+  let ctx = 'Eres un asistente personal de fitness y nutrición, amable y motivador. Responde siempre en español, de forma clara y concisa. Usa listas con • cuando sea útil. Evita respuestas demasiado largas.';
+
+  if (p.name) ctx += `\n\nUsuario: ${p.name}`;
+  if (p.weight) ctx += `, ${p.weight}kg`;
+  if (p.height) ctx += `, ${p.height}cm`;
+  if (p.age) ctx += `, ${p.age} años`;
+  if (p.sex) ctx += `, ${p.sex === 'M' ? 'hombre' : 'mujer'}`;
+  if (p.goal) ctx += `\nObjetivo: ${{ loss:'perder grasa', maintain:'mantenimiento', gain:'ganar músculo' }[p.goal] || p.goal}`;
+  ctx += `\nObjetivos diarios: ${p.kcal || 2000} kcal, ${p.prot || 150}g proteína, ${p.carb || 200}g carbos, ${p.fat || 65}g grasa.`;
+
+  if (meals.length) {
+    const totals = meals.reduce((acc, m) => {
+      (m.foods || []).forEach(f => { acc.kcal += f.kcal||0; acc.prot += f.prot||0; acc.carb += f.carb||0; acc.fat += f.fat||0; });
+      return acc;
+    }, {kcal:0, prot:0, carb:0, fat:0});
+    ctx += `\nHoy lleva consumido: ${Math.round(totals.kcal)} kcal, ${totals.prot.toFixed(1)}g prot, ${totals.carb.toFixed(1)}g carbs, ${totals.fat.toFixed(1)}g grasa.`;
+    ctx += '\nComidas registradas hoy: ' + meals.map(m => m.name + ' (' + (m.foods||[]).map(f=>f.name).join(', ') + ')').join(' | ');
+  }
+  if (workouts.length) {
+    ctx += '\nEntrenamiento de hoy: ' + workouts.map(w => (w.name||'Sesión') + ' - ' + (w.exercises||[]).map(e=>e.name).join(', ')).join(' | ');
+  }
+  return ctx;
+}
+
+function sendChatContext() {
+  const p = getProfile();
+  const today = getToday();
+  const meals = getMeals().filter(m => m.date === today);
+  const workouts = getWorkouts().filter(w => w.date === today);
+
+  let msg = `📊 Mi resumen de hoy (${today}):\n`;
+
+  if (meals.length) {
+    const totals = meals.reduce((acc, m) => {
+      (m.foods||[]).forEach(f => { acc.kcal += f.kcal||0; acc.prot += f.prot||0; acc.carb += f.carb||0; acc.fat += f.fat||0; });
+      return acc;
+    }, {kcal:0, prot:0, carb:0, fat:0});
+    msg += `• Calorías: ${Math.round(totals.kcal)} / ${p.kcal||2000} kcal\n`;
+    msg += `• Proteína: ${totals.prot.toFixed(1)} / ${p.prot||150}g\n`;
+    msg += `• Carbos: ${totals.carb.toFixed(1)} / ${p.carb||200}g\n`;
+    msg += `• Grasa: ${totals.fat.toFixed(1)} / ${p.fat||65}g\n`;
+    meals.forEach(m => {
+      msg += `• ${m.name}: ` + (m.foods||[]).map(f => f.name).join(', ') + '\n';
+    });
+  } else {
+    msg += '• Aún no he registrado comidas hoy\n';
+  }
+
+  if (workouts.length) {
+    workouts.forEach(w => {
+      msg += `• Entrenamiento: ${w.name||'Sesión'} - ${(w.exercises||[]).map(e=>e.name).join(', ')}\n`;
+    });
+  } else {
+    msg += '• Sin entrenamiento registrado hoy\n';
+  }
+
+  msg += '\n¿Qué me recomiendas?';
+
+  const ta = document.getElementById('chat-textarea');
+  ta.value = msg;
+  autoResizeChat(ta);
+  ta.focus();
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 applyPhotoBg(getProfile().name);
 renderDashboard();
