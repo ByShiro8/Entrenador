@@ -1227,13 +1227,7 @@ async function testApiKey() {
     const lr = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
     if (!lr.ok) { const e = await lr.json(); showToast('❌ Clave inválida: ' + (e.error?.message||'')); return; }
     const data = await lr.json();
-    const candidates = (data.models||[])
-      .filter(m => (m.supportedGenerationMethods||[]).includes('generateContent'))
-      .filter(m => m.name.includes('flash') || m.name.includes('pro'))
-      .sort((a,b) => {
-        const score = n => n.includes('1.5-flash') ? 0 : n.includes('1.0') ? 1 : n.includes('flash') ? 2 : 3;
-        return score(a.name) - score(b.name);
-      });
+    const candidates = ['gemini-1.5-flash','gemini-1.5-flash-8b','gemini-1.5-pro'].map(mn => ({name:'models/'+mn}));
     let found = null;
     for (const m of candidates) {
       const mn = m.name.replace('models/','');
