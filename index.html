@@ -218,65 +218,65 @@
     <div class="stats-grid">
       <div class="stat-card accent">
         <div class="stat-val" id="dash-kcal-total">0</div>
-        <div class="stat-label">kcal hoy</div>
+        <div class="stat-label" data-i18n="dash.kcal.today">kcal hoy</div>
       </div>
       <div class="stat-card green">
         <div class="stat-val" id="dash-workouts-week">0</div>
-        <div class="stat-label">entrenos semana</div>
+        <div class="stat-label" data-i18n="dash.workouts.week">entrenos semana</div>
       </div>
     </div>
     <div class="card" id="macro-card">
-      <div class="card-title">Macros de hoy</div>
+      <div class="card-title" data-i18n="dash.macros.title">Macros de hoy</div>
       <div style="margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:14px;font-weight:700;color:#6366f1">Proteína</span>
+          <span style="font-size:14px;font-weight:700;color:#6366f1" data-i18n="dash.macro.prot">Proteína</span>
           <span style="font-size:22px;font-weight:900;color:#6366f1" id="macro-p-val">0g <span id="bar-p-text" style="font-size:12px;font-weight:600;opacity:.7">/ 150g</span></span>
         </div>
         <div class="progress-bar" style="height:10px"><div class="progress-fill" id="bar-p" style="width:0%;background:#6366f1"></div></div>
       </div>
       <div style="margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:14px;font-weight:700;color:#f59e0b">Carbos</span>
+          <span style="font-size:14px;font-weight:700;color:#f59e0b" data-i18n="dash.macro.carb">Carbos</span>
           <span style="font-size:22px;font-weight:900;color:#f59e0b" id="macro-c-val">0g <span id="bar-c-text" style="font-size:12px;font-weight:600;opacity:.7">/ 200g</span></span>
         </div>
         <div class="progress-bar" style="height:10px"><div class="progress-fill" id="bar-c" style="width:0%;background:#f59e0b"></div></div>
       </div>
       <div style="margin-bottom:14px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
-          <span style="font-size:14px;font-weight:700;color:#ef4444">Grasa</span>
+          <span style="font-size:14px;font-weight:700;color:#ef4444" data-i18n="dash.macro.fat">Grasa</span>
           <span style="font-size:22px;font-weight:900;color:#ef4444" id="macro-f-val">0g <span id="bar-f-text" style="font-size:12px;font-weight:600;opacity:.7">/ 65g</span></span>
         </div>
         <div class="progress-bar" style="height:10px"><div class="progress-fill" id="bar-f" style="width:0%;background:#ef4444"></div></div>
       </div>
       <div>
         <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px">
-          <span>Calorías</span><span id="kcal-progress-text">0 / 2000 kcal</span>
+          <span data-i18n="dash.macro.kcal">Calorías</span><span id="kcal-progress-text">0 / 2000 kcal</span>
         </div>
         <div class="progress-bar" style="height:10px"><div class="progress-fill" id="kcal-bar" style="width:0%;background:linear-gradient(90deg,#6366f1,#8b5cf6)"></div></div>
       </div>
     </div>
     <div class="card" id="today-workout-card">
-      <div class="card-title">Último entrenamiento</div>
-      <div id="last-workout-preview"><span style="color:var(--muted);font-size:14px">Sin entrenos hoy. ¡A por ello!</span></div>
+      <div class="card-title" data-i18n="dash.last.workout">Último entrenamiento</div>
+      <div id="last-workout-preview"><span style="color:var(--muted);font-size:14px" data-i18n="dash.no.workout">Sin entrenos hoy. ¡A por ello!</span></div>
     </div>
     <div class="card">
-      <div class="card-title">Últimas comidas</div>
-      <div id="last-meals-preview"><span style="color:var(--muted);font-size:14px">Sin comidas registradas hoy.</span></div>
+      <div class="card-title" data-i18n="dash.last.meals">Últimas comidas</div>
+      <div id="last-meals-preview"><span style="color:var(--muted);font-size:14px" data-i18n="dash.no.meals">Sin comidas registradas hoy.</span></div>
     </div>
   </div>
 </div>
 
 <div id="page-entreno" class="page">
   <div class="page-header">
-    <div class="page-title">Entrenos 🏋️</div>
-    <div class="page-sub" id="entreno-sub">Registra tu sesión</div>
+    <div class="page-title" data-i18n="page.entreno">Entrenos 🏋️</div>
+    <div class="page-sub" id="entreno-sub" data-i18n="page.entreno.sub">Registra tu sesión</div>
   </div>
   <div class="content">
     <div id="workout-list-container">
       <div class="empty" id="workout-empty">
         <div class="empty-icon">🏃</div>
-        <div class="empty-title">Sin entrenos hoy</div>
-        <div class="empty-sub">Pulsa + para empezar</div>
+        <div class="empty-title" data-i18n="empty.workouts.title">Sin entrenos hoy</div>
+        <div class="empty-sub" data-i18n="empty.workouts.sub">Pulsa + para empezar</div>
       </div>
     </div>
   </div>
@@ -285,8 +285,8 @@
 
 <div id="page-nutricion" class="page">
   <div class="page-header">
-    <div class="page-title">Nutrición 🥗</div>
-    <div class="page-sub">Controla tus macros</div>
+    <div class="page-title" data-i18n="page.nutricion">Nutrición 🥗</div>
+    <div class="page-sub" data-i18n="page.nutricion.sub">Controla tus macros</div>
   </div>
   <div class="content">
     <div class="card" style="padding:12px 16px">
@@ -300,8 +300,8 @@
     <div id="meals-container">
       <div class="empty" id="meals-empty">
         <div class="empty-icon">🍽️</div>
-        <div class="empty-title">Sin comidas hoy</div>
-        <div class="empty-sub">Pulsa + para añadir</div>
+        <div class="empty-title" data-i18n="empty.meals.title">Sin comidas hoy</div>
+        <div class="empty-sub" data-i18n="empty.meals.sub">Pulsa + para añadir</div>
       </div>
     </div>
   </div>
@@ -310,14 +310,14 @@
 
 <div id="page-historial" class="page">
   <div class="page-header">
-    <div class="page-title">Historial 📊</div>
-    <div class="page-sub">Tu progreso completo</div>
+    <div class="page-title" data-i18n="page.historial">Historial 📊</div>
+    <div class="page-sub" data-i18n="page.historial.sub">Tu progreso completo</div>
   </div>
   <div class="content">
     <div class="chips" id="history-filter">
-      <div class="chip selected" onclick="setHistoryFilter('all',this)">Todo</div>
-      <div class="chip" onclick="setHistoryFilter('workout',this)">Entrenos</div>
-      <div class="chip" onclick="setHistoryFilter('meal',this)">Comidas</div>
+      <div class="chip selected" onclick="setHistoryFilter('all',this)" data-i18n="hist.all">Todo</div>
+      <div class="chip" onclick="setHistoryFilter('workout',this)" data-i18n="hist.workouts">Entrenos</div>
+      <div class="chip" onclick="setHistoryFilter('meal',this)" data-i18n="hist.meals">Comidas</div>
     </div>
     <div id="history-list"></div>
   </div>
@@ -325,7 +325,7 @@
 
 <div id="page-perfil" class="page">
   <div class="page-header">
-    <div class="page-title">Perfil 👤</div>
+    <div class="page-title" data-i18n="page.perfil">Perfil 👤</div>
   </div>
   <div class="content">
     <div class="card">
@@ -334,88 +334,95 @@
       <div class="profile-sub" id="profile-stats-display">Configura tus datos</div>
     </div>
     <div class="card">
-      <div class="card-title">Escaneo de etiquetas (IA)</div>
+      <div class="card-title" data-i18n="pf.scan.title">Escaneo de etiquetas (IA)</div>
       <div class="form-group">
-        <label>API Key de Gemini (Google) — Gratis</label>
+        <label data-i18n="pf.apikey.label">API Key de Gemini (Google) — Gratis</label>
         <input type="password" id="pf-apikey" placeholder="AIza...">
         <div class="api-key-note">Consíguela gratis en <strong>aistudio.google.com</strong> → "Get API key". Se guarda solo en tu dispositivo.</div>
       </div>
       <a href="https://aistudio.google.com/apikey" target="_blank" class="btn btn-ghost btn-sm" style="width:100%;margin-top:4px;text-decoration:none;display:flex">🌐 Ir a Google AI Studio</a>
-      <button class="btn btn-ghost btn-sm" onclick="testApiKey()" style="width:100%;margin-top:8px">Verificar clave</button>
+      <button class="btn btn-ghost btn-sm" onclick="testApiKey()" style="width:100%;margin-top:8px" data-i18n="pf.verify">Verificar clave</button>
     </div>
     <div class="card">
-      <div class="card-title">Datos personales</div>
+      <div class="card-title" data-i18n="pf.personal">Datos personales</div>
       <div class="form-group">
-        <label>Nombre</label>
+        <label data-i18n="pf.name">Nombre</label>
         <input type="text" id="pf-name" placeholder="Tu nombre">
       </div>
       <div class="row">
         <div class="form-group">
-          <label>Edad</label>
+          <label data-i18n="pf.age">Edad</label>
           <input type="number" id="pf-age" placeholder="25">
         </div>
         <div class="form-group">
-          <label>Sexo</label>
+          <label data-i18n="pf.sex">Sexo</label>
           <select id="pf-sex">
-            <option value="M">Hombre</option>
-            <option value="F">Mujer</option>
+            <option value="M" data-i18n="pf.sex.m">Hombre</option>
+            <option value="F" data-i18n="pf.sex.f">Mujer</option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label>Peso (kg)</label>
+          <label data-i18n="pf.weight">Peso (kg)</label>
           <input type="number" id="pf-weight" placeholder="75" step="0.1">
         </div>
         <div class="form-group">
-          <label>Altura (cm)</label>
+          <label data-i18n="pf.height">Altura (cm)</label>
           <input type="number" id="pf-height" placeholder="175">
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Objetivos diarios</div>
+      <div class="card-title" data-i18n="pf.goals">Objetivos diarios</div>
       <div class="row">
         <div class="form-group">
-          <label>Calorías</label>
+          <label data-i18n="pf.kcal">Calorías</label>
           <input type="number" id="pf-kcal" placeholder="2000">
         </div>
         <div class="form-group">
-          <label>Proteína (g)</label>
+          <label data-i18n="pf.prot">Proteína (g)</label>
           <input type="number" id="pf-prot" placeholder="150">
         </div>
       </div>
       <div class="row">
         <div class="form-group">
-          <label>Carbos (g)</label>
+          <label data-i18n="pf.carb">Carbos (g)</label>
           <input type="number" id="pf-carb" placeholder="200">
         </div>
         <div class="form-group">
-          <label>Grasa (g)</label>
+          <label data-i18n="pf.fat">Grasa (g)</label>
           <input type="number" id="pf-fat" placeholder="65">
         </div>
       </div>
       <div class="form-group">
-        <label>Objetivo</label>
+        <label data-i18n="pf.goal">Objetivo</label>
         <select id="pf-goal">
-          <option value="loss">Perder grasa</option>
-          <option value="maintain">Mantenimiento</option>
-          <option value="gain">Ganar músculo</option>
+          <option value="loss" data-i18n="pf.goal.loss">Perder grasa</option>
+          <option value="maintain" data-i18n="pf.goal.maintain">Mantenimiento</option>
+          <option value="gain" data-i18n="pf.goal.gain">Ganar músculo</option>
         </select>
       </div>
     </div>
-    <button class="btn btn-primary btn-full" onclick="saveProfile()">Guardar perfil</button>
+    <div class="card">
+      <div class="card-title" data-i18n="pf.lang">Idioma</div>
+      <div style="display:flex;gap:10px">
+        <button id="lang-es-btn" class="btn btn-primary btn-full" onclick="setLang('es')" style="flex:1">🇪🇸 Castellano</button>
+        <button id="lang-ca-btn" class="btn btn-ghost btn-full" onclick="setLang('ca')" style="flex:1">Català</button>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="saveProfile()" data-i18n="pf.save">Guardar perfil</button>
     <div style="height:16px"></div>
     <div class="card">
-      <div class="card-title">Copia de seguridad</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Guarda tus datos como fichero para no perderlos al cerrar el navegador.</div>
+      <div class="card-title" data-i18n="pf.backup">Copia de seguridad</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px" data-i18n="pf.backup.note">Guarda tus datos como fichero para no perderlos al cerrar el navegador.</div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
-        <button class="btn btn-ghost btn-full" onclick="exportData()">⬇️ Exportar datos</button>
-        <button class="btn btn-ghost btn-full" onclick="document.getElementById('import-file').click()">⬆️ Importar datos</button>
+        <button class="btn btn-ghost btn-full" onclick="exportData()" data-i18n="pf.export">⬇️ Exportar datos</button>
+        <button class="btn btn-ghost btn-full" onclick="document.getElementById('import-file').click()" data-i18n="pf.import">⬆️ Importar datos</button>
       </div>
       <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(this)">
     </div>
-    <button class="btn btn-danger btn-full" onclick="clearAllData()" style="margin-top:8px">Borrar todos los datos</button>
+    <button class="btn btn-danger btn-full" onclick="clearAllData()" style="margin-top:8px" data-i18n="pf.delete">Borrar todos los datos</button>
     <div style="height:16px"></div>
   </div>
 </div>
@@ -423,8 +430,8 @@
 <!-- CHAT PAGE -->
 <div id="page-chat" class="page">
   <div class="page-header">
-    <div class="page-title">Asistente IA 🤖</div>
-    <div class="page-sub">Pregunta sobre nutrición, recetas o entrenamientos</div>
+    <div class="page-title" data-i18n="page.chat">Asistente IA 🤖</div>
+    <div class="page-sub" data-i18n="page.chat.sub">Pregunta sobre nutrición, recetas o entrenamientos</div>
   </div>
   <div id="chat-messages" class="chat-messages"></div>
 </div>
@@ -442,32 +449,32 @@
 <nav class="nav">
   <button class="nav-btn active" onclick="switchPage('dashboard')" id="nav-dashboard">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    Inicio
+    <span data-i18n="nav.inicio">Inicio</span>
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('entreno')" id="nav-entreno">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 4v16M18 4v16M6 12h12M3 7h3M18 7h3M3 17h3M18 17h3"/></svg>
-    Entreno
+    <span data-i18n="nav.entreno">Entreno</span>
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('nutricion')" id="nav-nutricion">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg>
-    Nutrición
+    <span data-i18n="nav.nutricion">Nutrición</span>
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('historial')" id="nav-historial">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    Historial
+    <span data-i18n="nav.historial">Historial</span>
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('chat')" id="nav-chat">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    IA
+    <span data-i18n="nav.ia">IA</span>
     <div class="dot"></div>
   </button>
   <button class="nav-btn" onclick="switchPage('perfil')" id="nav-perfil">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-    Perfil
+    <span data-i18n="nav.perfil">Perfil</span>
     <div class="dot"></div>
   </button>
 </nav>
@@ -476,48 +483,48 @@
 <div class="modal-overlay" id="workout-modal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-title">Nuevo entreno</div>
+    <div class="modal-title" data-i18n="wo.title">Nuevo entreno</div>
     <div class="form-group">
-      <label>Nombre de sesión</label>
+      <label data-i18n="wo.name.label">Nombre de sesión</label>
       <input type="text" id="wk-name" placeholder="Ej: Push day, Piernas...">
     </div>
     <div class="form-group">
-      <label>Tipo</label>
+      <label data-i18n="wo.type">Tipo</label>
       <div class="chips" id="wk-type-chips">
-        <div class="chip selected" onclick="selectChip(this,'wk-type-chips')">Fuerza</div>
-        <div class="chip" onclick="selectChip(this,'wk-type-chips')">Cardio</div>
-        <div class="chip" onclick="selectChip(this,'wk-type-chips')">Hipertrofia</div>
+        <div class="chip selected" onclick="selectChip(this,'wk-type-chips')" data-i18n="wo.type.strength">Fuerza</div>
+        <div class="chip" onclick="selectChip(this,'wk-type-chips')" data-i18n="wo.type.cardio">Cardio</div>
+        <div class="chip" onclick="selectChip(this,'wk-type-chips')" data-i18n="wo.type.hyper">Hipertrofia</div>
         <div class="chip" onclick="selectChip(this,'wk-type-chips')">HIIT</div>
-        <div class="chip" onclick="selectChip(this,'wk-type-chips')">Movilidad</div>
+        <div class="chip" onclick="selectChip(this,'wk-type-chips')" data-i18n="wo.type.mobility">Movilidad</div>
       </div>
     </div>
     <div class="form-group">
-      <label>Grupo muscular</label>
+      <label data-i18n="wo.muscle">Grupo muscular</label>
       <div class="chips" id="wk-muscle-chips">
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Pecho</div>
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Espalda</div>
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Hombros</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.chest">Pecho</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.back">Espalda</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.shoulders">Hombros</div>
         <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Bíceps</div>
         <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Tríceps</div>
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Piernas</div>
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Abdomen</div>
-        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')">Full body</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.legs">Piernas</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.core">Abdomen</div>
+        <div class="chip" onclick="selectChip(this,'wk-muscle-chips')" data-i18n="mu.full">Full body</div>
       </div>
     </div>
-    <div class="card-title" style="margin-bottom:12px">Ejercicios</div>
+    <div class="card-title" style="margin-bottom:12px" data-i18n="wo.exercises">Ejercicios</div>
     <div id="exercises-list"></div>
-    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="addExerciseRow()">+ Añadir ejercicio</button>
+    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="addExerciseRow()" data-i18n="wo.add.ex">+ Añadir ejercicio</button>
     <div class="form-group">
-      <label>Duración (min)</label>
+      <label data-i18n="wo.duration">Duración (min)</label>
       <input type="number" id="wk-duration" placeholder="60">
     </div>
     <div class="form-group">
-      <label>Notas</label>
+      <label data-i18n="wo.notes">Notas</label>
       <textarea id="wk-notes" rows="2" placeholder="Sensaciones, PR, ajustes..."></textarea>
     </div>
     <div style="display:flex;gap:10px;margin-top:8px">
-      <button class="btn btn-ghost btn-full" onclick="closeModal('workout-modal')">Cancelar</button>
-      <button class="btn btn-primary btn-full" onclick="saveWorkout()">Guardar</button>
+      <button class="btn btn-ghost btn-full" onclick="closeModal('workout-modal')" data-i18n="btn.cancel">Cancelar</button>
+      <button class="btn btn-primary btn-full" onclick="saveWorkout()" data-i18n="btn.save">Guardar</button>
     </div>
   </div>
 </div>
@@ -526,33 +533,33 @@
 <div class="modal-overlay" id="meal-modal">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-title">Añadir comida</div>
+    <div class="modal-title" data-i18n="meal.title">Añadir comida</div>
     <div class="form-group">
-      <label>Tipo de comida</label>
+      <label data-i18n="meal.type.label">Tipo de comida</label>
       <div class="chips" id="meal-type-chips">
-        <div class="chip selected" onclick="selectChip(this,'meal-type-chips')">Desayuno</div>
-        <div class="chip" onclick="selectChip(this,'meal-type-chips')">Almuerzo</div>
-        <div class="chip" onclick="selectChip(this,'meal-type-chips')">Comida</div>
-        <div class="chip" onclick="selectChip(this,'meal-type-chips')">Merienda</div>
-        <div class="chip" onclick="selectChip(this,'meal-type-chips')">Cena</div>
+        <div class="chip selected" onclick="selectChip(this,'meal-type-chips')" data-i18n="meal.breakfast">Desayuno</div>
+        <div class="chip" onclick="selectChip(this,'meal-type-chips')" data-i18n="meal.brunch">Almuerzo</div>
+        <div class="chip" onclick="selectChip(this,'meal-type-chips')" data-i18n="meal.lunch">Comida</div>
+        <div class="chip" onclick="selectChip(this,'meal-type-chips')" data-i18n="meal.snackpm">Merienda</div>
+        <div class="chip" onclick="selectChip(this,'meal-type-chips')" data-i18n="meal.dinner">Cena</div>
         <div class="chip" onclick="selectChip(this,'meal-type-chips')">Snack</div>
       </div>
     </div>
-    <div class="card-title" style="margin-bottom:10px">Alimentos</div>
+    <div class="card-title" style="margin-bottom:10px" data-i18n="meal.foods">Alimentos</div>
     <div id="foods-list"></div>
-    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="addFoodRow()">+ Añadir alimento</button>
+    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="addFoodRow()" data-i18n="meal.add.food">+ Añadir alimento</button>
     <div class="card" style="background:var(--surface2)">
-      <div class="card-title">Totales</div>
+      <div class="card-title" data-i18n="meal.totals">Totales</div>
       <div style="display:flex;justify-content:space-around;text-align:center">
         <div><div id="meal-total-kcal" style="font-size:20px;font-weight:800">0</div><div class="stat-label">kcal</div></div>
         <div><div id="meal-total-p" style="font-size:20px;font-weight:800;color:#6366f1">0g</div><div class="stat-label">Prot</div></div>
         <div><div id="meal-total-c" style="font-size:20px;font-weight:800;color:#f59e0b">0g</div><div class="stat-label">Carbs</div></div>
-        <div><div id="meal-total-f" style="font-size:20px;font-weight:800;color:#ef4444">0g</div><div class="stat-label">Grasa</div></div>
+        <div><div id="meal-total-f" style="font-size:20px;font-weight:800;color:#ef4444">0g</div><div class="stat-label" data-i18n="macro.fat">Grasa</div></div>
       </div>
     </div>
     <div style="display:flex;gap:10px;margin-top:12px">
-      <button class="btn btn-ghost btn-full" onclick="closeModal('meal-modal')">Cancelar</button>
-      <button class="btn btn-primary btn-full" onclick="saveMeal()">Guardar</button>
+      <button class="btn btn-ghost btn-full" onclick="closeModal('meal-modal')" data-i18n="btn.cancel">Cancelar</button>
+      <button class="btn btn-primary btn-full" onclick="saveMeal()" data-i18n="btn.save">Guardar</button>
     </div>
   </div>
 </div>
@@ -592,6 +599,161 @@ function getWeekDates() {
 
 const DEFAULT_API_KEY = 'AIzaSyA4wFQbX5isde3HRGXk7PQKXTqjgJhDgpE';
 function getProfile() { const p = DB.get('profile') || {}; return { name:'', age:'', sex:'M', weight:'', height:'', kcal:2000, prot:150, carb:200, fat:65, goal:'maintain', ...p, apikey: p.apikey || DEFAULT_API_KEY }; }
+
+// ─── IDIOMA / LANGUAGE ────────────────────────────────────────────────────────
+const TEXTS = {
+  'nav.inicio':     {es:'Inicio',           ca:'Inici'},
+  'nav.entreno':    {es:'Entreno',          ca:'Entrenament'},
+  'nav.nutricion':  {es:'Nutrición',        ca:'Nutrició'},
+  'nav.historial':  {es:'Historial',        ca:'Historial'},
+  'nav.ia':         {es:'IA',               ca:'IA'},
+  'nav.perfil':     {es:'Perfil',           ca:'Perfil'},
+  'page.entreno':   {es:'Entrenos 🏋️',      ca:'Entrenaments 🏋️'},
+  'page.entreno.sub':{es:'Registra tu sesión', ca:'Registra la teva sessió'},
+  'page.nutricion': {es:'Nutrición 🥗',     ca:'Nutrició 🥗'},
+  'page.nutricion.sub':{es:'Controla tus macros', ca:'Controla els teus macros'},
+  'page.historial': {es:'Historial 📊',     ca:'Historial 📊'},
+  'page.historial.sub':{es:'Tu progreso completo', ca:'El teu progrés complet'},
+  'page.chat':      {es:'Asistente IA 🤖',  ca:'Assistent IA 🤖'},
+  'page.chat.sub':  {es:'Pregunta sobre nutrición, recetas o entrenamientos', ca:'Pregunta sobre nutrició, receptes o entrenaments'},
+  'page.perfil':    {es:'Perfil 👤',        ca:'Perfil 👤'},
+  'hist.all':       {es:'Todo',             ca:'Tot'},
+  'hist.workouts':  {es:'Entrenos',         ca:'Entrenaments'},
+  'hist.meals':     {es:'Comidas',          ca:'Menjars'},
+  'wo.title':       {es:'Nuevo entreno',    ca:'Nou entrenament'},
+  'wo.name.label':  {es:'Nombre de sesión', ca:'Nom de la sessió'},
+  'wo.type':        {es:'Tipo',             ca:'Tipus'},
+  'wo.type.strength':{es:'Fuerza',          ca:'Força'},
+  'wo.type.cardio': {es:'Cardio',           ca:'Cardio'},
+  'wo.type.hyper':  {es:'Hipertrofia',      ca:'Hipertròfia'},
+  'wo.type.mobility':{es:'Movilidad',       ca:'Mobilitat'},
+  'wo.muscle':      {es:'Grupo muscular',   ca:'Grup muscular'},
+  'mu.chest':       {es:'Pecho',            ca:'Pit'},
+  'mu.back':        {es:'Espalda',          ca:'Esquena'},
+  'mu.shoulders':   {es:'Hombros',          ca:'Espatlles'},
+  'mu.legs':        {es:'Piernas',          ca:'Cames'},
+  'mu.core':        {es:'Abdomen',          ca:'Abdomen'},
+  'mu.full':        {es:'Full body',        ca:'Cos sencer'},
+  'wo.exercises':   {es:'Ejercicios',       ca:'Exercicis'},
+  'wo.add.ex':      {es:'+ Añadir ejercicio', ca:'+ Afegir exercici'},
+  'wo.duration':    {es:'Duración (min)',   ca:'Durada (min)'},
+  'wo.notes':       {es:'Notas',            ca:'Notes'},
+  'wo.ex.name':     {es:'Ejercicio',        ca:'Exercici'},
+  'wo.ex.sets':     {es:'Series',           ca:'Sèries'},
+  'wo.ex.reps':     {es:'Reps',             ca:'Reps'},
+  'wo.ex.weight':   {es:'Kg',              ca:'Kg'},
+  'wo.ex.rir':      {es:'RIR',             ca:'RIR'},
+  'wo.ex.notes':    {es:'Notas',           ca:'Notes'},
+  'meal.title':     {es:'Añadir comida',   ca:'Afegir menjar'},
+  'meal.type.label':{es:'Tipo de comida',  ca:'Tipus de menjar'},
+  'meal.breakfast': {es:'Desayuno',        ca:'Esmorzar'},
+  'meal.brunch':    {es:'Almuerzo',        ca:'Segon esmorzar'},
+  'meal.lunch':     {es:'Comida',          ca:'Dinar'},
+  'meal.snackpm':   {es:'Merienda',        ca:'Berenar'},
+  'meal.dinner':    {es:'Cena',            ca:'Sopar'},
+  'meal.foods':     {es:'Alimentos',       ca:'Aliments'},
+  'meal.add.food':  {es:'+ Añadir alimento', ca:'+ Afegir aliment'},
+  'meal.totals':    {es:'Totales',         ca:'Totals'},
+  'macro.fat':      {es:'Grasa',           ca:'Greix'},
+  'btn.cancel':     {es:'Cancelar',        ca:'Cancel·lar'},
+  'btn.save':       {es:'Guardar',         ca:'Desar'},
+  'pf.scan.title':  {es:'Escaneo de etiquetas (IA)', ca:"Escaneig d'etiquetes (IA)"},
+  'pf.apikey.label':{es:'API Key de Gemini (Google) — Gratis', ca:'API Key de Gemini (Google) — Gratis'},
+  'pf.verify':      {es:'Verificar clave', ca:'Verificar clau'},
+  'pf.personal':    {es:'Datos personales', ca:'Dades personals'},
+  'pf.name':        {es:'Nombre',          ca:'Nom'},
+  'pf.age':         {es:'Edad',            ca:'Edat'},
+  'pf.sex':         {es:'Sexo',            ca:'Sexe'},
+  'pf.sex.m':       {es:'Hombre',          ca:'Home'},
+  'pf.sex.f':       {es:'Mujer',           ca:'Dona'},
+  'pf.weight':      {es:'Peso (kg)',        ca:'Pes (kg)'},
+  'pf.height':      {es:'Altura (cm)',      ca:'Alçada (cm)'},
+  'pf.goals':       {es:'Objetivos diarios', ca:'Objectius diaris'},
+  'pf.kcal':        {es:'Calorías',         ca:'Calories'},
+  'pf.prot':        {es:'Proteína (g)',     ca:'Proteïna (g)'},
+  'pf.carb':        {es:'Carbos (g)',       ca:'Carbohidrats (g)'},
+  'pf.fat':         {es:'Grasa (g)',        ca:'Greix (g)'},
+  'pf.goal':        {es:'Objetivo',         ca:'Objectiu'},
+  'pf.goal.loss':   {es:'Perder grasa',     ca:'Perdre greix'},
+  'pf.goal.maintain':{es:'Mantenimiento',   ca:'Manteniment'},
+  'pf.goal.gain':   {es:'Ganar músculo',    ca:'Guanyar múscul'},
+  'pf.lang':        {es:'Idioma',           ca:'Idioma'},
+  'pf.save':        {es:'Guardar perfil',   ca:'Desar perfil'},
+  'pf.backup':      {es:'Copia de seguridad', ca:'Còpia de seguretat'},
+  'pf.backup.note': {es:'Guarda tus datos como fichero para no perderlos al cerrar el navegador.', ca:'Desa les teves dades com a fitxer per no perdre-les en tancar el navegador.'},
+  'pf.export':      {es:'⬇️ Exportar datos', ca:'⬇️ Exportar dades'},
+  'pf.import':      {es:'⬆️ Importar datos', ca:'⬆️ Importar dades'},
+  'pf.delete':      {es:'Borrar todos los datos', ca:'Esborrar totes les dades'},
+  'food.amount':    {es:'Cantidad (g)',     ca:'Quantitat (g)'},
+  'food.scan':      {es:'📷 Escanear etiqueta nutricional', ca:'📷 Escanejar etiqueta nutricional'},
+  'food.save.cat':  {es:'💾 Guardar en catálogo', ca:'💾 Desar al catàleg'},
+  'food.catalog.empty':{es:'📷 Escanea productos para guardarlos aquí', ca:'📷 Escaneja productes per guardar-los aquí'},
+  'dash.greeting.morning':  {es:'¡Buenos días',   ca:'Bon dia'},
+  'dash.greeting.afternoon':{es:'¡Buenas tardes', ca:'Bona tarda'},
+  'dash.greeting.evening':  {es:'¡Buenas noches', ca:'Bona nit'},
+  'dash.kcal.today':   {es:'kcal hoy',          ca:'kcal avui'},
+  'dash.workouts.week':{es:'entrenos semana',    ca:'entrenaments setmana'},
+  'dash.macros.title': {es:'Macros de hoy',      ca:'Macros d\'avui'},
+  'dash.macro.prot':   {es:'Proteína',           ca:'Proteïna'},
+  'dash.macro.carb':   {es:'Carbos',             ca:'Carbohidrats'},
+  'dash.macro.fat':    {es:'Grasa',              ca:'Greix'},
+  'dash.macro.kcal':   {es:'Calorías',           ca:'Calories'},
+  'dash.last.workout': {es:'Último entrenamiento', ca:'Últim entrenament'},
+  'dash.last.meals':   {es:'Últimas comidas',    ca:'Últims menjars'},
+  'dash.streak':    {es:'días de racha 🔥',  ca:'dies de ratxa 🔥'},
+  'dash.no.workout':{es:'Sin entrenos hoy. ¡A por ello!', ca:"Sense entrenaments avui. A per elles!"},
+  'dash.no.meals':  {es:'Sin comidas registradas hoy.', ca:'Sense menjars registrats avui.'},
+  'dash.exercises': {es:'ejercicios',       ca:'exercicis'},
+  'dash.foods':     {es:'aliments',         ca:'aliments'},
+  'empty.workouts.title':{es:'Sin entrenos hoy',  ca:'Sense entrenaments avui'},
+  'empty.workouts.sub':  {es:'Pulsa + para empezar', ca:'Prem + per començar'},
+  'empty.meals.title':{es:'Sin comidas hoy',     ca:'Sense menjars avui'},
+  'empty.meals.sub':  {es:'Pulsa + para añadir', ca:'Prem + per afegir'},
+  'empty.history.title':{es:'Sin registros aún', ca:'Sense registres encara'},
+  'empty.history.sub':  {es:'Empieza a entrenar y comer bien', ca:'Comença a entrenar i menjar bé'},
+  'toast.profile':  {es:'Perfil guardado ✓', ca:'Perfil desat ✓'},
+  'toast.meal':     {es:'¡Comida registrada! 🥗', ca:'Menjar registrat! 🥗'},
+  'toast.workout':  {es:'¡Entreno guardado! 💪', ca:'Entrenament desat! 💪'},
+  'toast.catalog':  {es:'✅ Guardado en catálogo', ca:'✅ Desat al catàleg'},
+  'toast.catalog.dup':{es:'⚠️ Ya está en el catálogo', ca:'⚠️ Ja és al catàleg'},
+  'toast.label.read':{es:'✅ Etiqueta leída', ca:'✅ Etiqueta llegida'},
+  'toast.label.err':{es:'⚠️ No se pudo leer la etiqueta, rellena manualmente', ca:"⚠️ No s'ha pogut llegir l'etiqueta, omple manualment"},
+  'chat.greet':     {es:'¡Hola', ca:'Hola'},
+  'chat.greet.body':{es:'Soy tu asistente de fitness y nutrición. Puedo ayudarte con:\n\n• **Recetas** según los alimentos que tengas\n• **Consejos de entrenamiento** y ejercicios\n• **Dudas sobre nutrición** y macros\n• **Planificación** de comidas o rutinas\n\nToca el botón 📊 para enviarme tu resumen del día y te doy recomendaciones personalizadas.', ca:"Sóc el teu assistent de fitness i nutrició. Puc ajudar-te amb:\n\n• **Receptes** segons els aliments que tinguis\n• **Consells d'entrenament** i exercicis\n• **Dubtes sobre nutrició** i macros\n• **Planificació** de menjars o rutines\n\nToca el botó 📊 per enviar-me el resum del dia i et dono recomanacions personalitzades."},
+  'chat.placeholder':{es:'Escribe tu pregunta...', ca:'Escriu la teva pregunta...'},
+  'chat.context.btn':{es:'Enviar resumen del día', ca:'Enviar resum del dia'},
+};
+
+function getLang() { return localStorage.getItem('appLang') || 'es'; }
+function t(key) { const e = TEXTS[key]; return e ? (e[getLang()] || e.es) : key; }
+
+function setLang(lang) {
+  localStorage.setItem('appLang', lang);
+  applyLang();
+  // Update button styles
+  document.getElementById('lang-es-btn').className = 'btn btn-full ' + (lang === 'es' ? 'btn-primary' : 'btn-ghost');
+  document.getElementById('lang-ca-btn').className = 'btn btn-full ' + (lang === 'ca' ? 'btn-primary' : 'btn-ghost');
+  // Re-render dynamic pages
+  renderDashboard();
+  showToast(lang === 'ca' ? '🏴 Català activat' : '🇪🇸 Castellano activado');
+}
+
+function applyLang() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val !== key) el.textContent = val;
+  });
+  // Chat textarea placeholder
+  const ta = document.getElementById('chat-textarea');
+  if (ta) ta.placeholder = t('chat.placeholder');
+  // Update lang buttons active state
+  const lang = getLang();
+  const esBtn = document.getElementById('lang-es-btn');
+  const caBtn = document.getElementById('lang-ca-btn');
+  if (esBtn) esBtn.className = 'btn btn-full ' + (lang === 'es' ? 'btn-primary' : 'btn-ghost');
+  if (caBtn) caBtn.className = 'btn btn-full ' + (lang === 'ca' ? 'btn-primary' : 'btn-ghost');
+}
 function getWorkouts() { return DB.get('workouts') || []; }
 function getMeals() { return DB.get('meals') || []; }
 function saveWorkouts(d) { DB.set('workouts', d); }
@@ -617,7 +779,7 @@ function renderCatalogSection(id) {
   if (!el) return;
   const catalog = getFoodCatalog();
   if (!catalog.length) {
-    el.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:6px 0 10px">📷 Escanea productos para guardarlos aquí</div>';
+    el.innerHTML = `<div style="font-size:12px;color:var(--muted);padding:6px 0 10px">${t('food.catalog.empty')}</div>`;
     return;
   }
   el.innerHTML = '<div class="scroll-x" style="margin-bottom:8px">' +
@@ -628,7 +790,7 @@ function saveRowToCatalog(id) {
   const name = document.getElementById('fn-'+id).value.trim();
   if (!name) { showToast('Escribe el nombre del alimento primero'); return; }
   const c = getFoodCatalog();
-  if (c.find(f => f.name.toLowerCase() === name.toLowerCase())) { showToast('⚠️ Ya está en el catálogo'); return; }
+  if (c.find(f => f.name.toLowerCase() === name.toLowerCase())) { showToast(t('toast.catalog.dup')); return; }
   const b = foodBases[id];
   const kcal = b ? b.kcal : (+document.getElementById('fk-'+id).value || 0);
   const prot = b ? b.prot : (+document.getElementById('fp-'+id).value || 0);
@@ -636,7 +798,7 @@ function saveRowToCatalog(id) {
   const fat  = b ? b.fat  : (+document.getElementById('ff-'+id).value || 0);
   addToCatalog(name, kcal, prot, carb, fat);
   document.querySelectorAll('[id^="catalog-"]').forEach(el => renderCatalogSection(el.id.replace('catalog-','')));
-  showToast('✅ Guardado en catálogo');
+  showToast(t('toast.catalog'));
 }
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
@@ -676,10 +838,11 @@ function renderDashboard() {
 
   // Greeting
   const h = new Date().getHours();
-  const greet = h < 12 ? '¡Buenos días!' : h < 20 ? '¡Buenas tardes!' : '¡Buenas noches!';
+  const greetKey = h < 12 ? 'dash.greeting.morning' : h < 20 ? 'dash.greeting.afternoon' : 'dash.greeting.evening';
   const pname = profile.name ? `, ${profile.name}` : '';
-  document.getElementById('greeting').textContent = greet + pname + ' 💪';
-  document.getElementById('today-date').textContent = new Date().toLocaleDateString('es-ES', {weekday:'long', day:'numeric', month:'long'});
+  document.getElementById('greeting').textContent = t(greetKey) + pname + '! 💪';
+  const loc = getLang() === 'ca' ? 'ca-ES' : 'es-ES';
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString(loc, {weekday:'long', day:'numeric', month:'long'});
 
   // Macros
   const totals = todayMeals.reduce((a,m) => {
@@ -709,7 +872,7 @@ function renderDashboard() {
   const streak = calcStreak(workouts);
   const ss = document.getElementById('streak-section');
   if (streak > 0) {
-    ss.innerHTML = `<div class="streak-banner"><div><div class="streak-num">${streak}</div><div class="streak-text">días de racha 🔥</div></div><div class="streak-icon">🔥</div></div>`;
+    ss.innerHTML = `<div class="streak-banner"><div><div class="streak-num">${streak}</div><div class="streak-text">${t('dash.streak')}</div></div><div class="streak-icon">🔥</div></div>`;
   } else { ss.innerHTML = ''; }
 
   // Last workout
@@ -717,16 +880,16 @@ function renderDashboard() {
   const lwEl = document.getElementById('last-workout-preview');
   if (todayW.length) {
     const w = todayW[todayW.length-1];
-    lwEl.innerHTML = `<div style="font-weight:700;font-size:15px">${w.name||'Sesión'}</div><div style="color:var(--muted);font-size:13px;margin-top:4px">${(w.exercises||[]).length} ejercicios · ${w.duration||'?'} min</div>`;
-  } else { lwEl.innerHTML = '<span style="color:var(--muted);font-size:14px">Sin entrenos hoy. ¡A por ello!</span>'; }
+    lwEl.innerHTML = `<div style="font-weight:700;font-size:15px">${w.name||'Sesión'}</div><div style="color:var(--muted);font-size:13px;margin-top:4px">${(w.exercises||[]).length} ${t('dash.exercises')} · ${w.duration||'?'} min</div>`;
+  } else { lwEl.innerHTML = `<span style="color:var(--muted);font-size:14px">${t('dash.no.workout')}</span>`; }
 
   // Last meals
   const lmEl = document.getElementById('last-meals-preview');
   if (todayMeals.length) {
     lmEl.innerHTML = todayMeals.slice(-3).map(m =>
-      `<div class="food-item"><div><div class="food-name">${m.type||'Comida'}</div><div class="food-macros">${(m.foods||[]).length} alimentos</div></div><div class="food-kcal">${Math.round((m.foods||[]).reduce((s,f)=>s+(+f.kcal||0),0))} kcal</div></div>`
+      `<div class="food-item"><div><div class="food-name">${m.type||'Comida'}</div><div class="food-macros">${(m.foods||[]).length} ${t('dash.foods')}</div></div><div class="food-kcal">${Math.round((m.foods||[]).reduce((s,f)=>s+(+f.kcal||0),0))} kcal</div></div>`
     ).join('');
-  } else { lmEl.innerHTML = '<span style="color:var(--muted);font-size:14px">Sin comidas registradas hoy.</span>'; }
+  } else { lmEl.innerHTML = `<span style="color:var(--muted);font-size:14px">${t('dash.no.meals')}</span>`; }
 }
 
 function setRing(id, val, max) {
@@ -883,7 +1046,7 @@ function saveWorkout() {
   closeModal('workout-modal');
   renderWorkoutsPage();
   renderDashboard();
-  showToast('¡Entreno guardado! 💪');
+  showToast(t('toast.workout'));
 }
 
 // ─── NUTRITION PAGE ───────────────────────────────────────────────────────────
@@ -899,7 +1062,7 @@ function renderNutritionPage() {
 
   const container = document.getElementById('meals-container');
   if (!meals.length) {
-    container.innerHTML = `<div class="empty" id="meals-empty"><div class="empty-icon">🍽️</div><div class="empty-title">Sin comidas hoy</div><div class="empty-sub">Pulsa + para añadir</div></div>`;
+    container.innerHTML = `<div class="empty" id="meals-empty"><div class="empty-icon">🍽️</div><div class="empty-title">${t('empty.meals.title')}</div><div class="empty-sub">${t('empty.meals.sub')}</div></div>`;
     return;
   }
 
@@ -957,12 +1120,12 @@ function addFoodRow() {
     <input type="file" accept="image/*" capture="environment" id="cam-${id}" style="display:none" onchange="scanFoodLabel(${id},this.files[0])">
     <img id="preview-${id}" class="scan-preview">
     <button class="scan-btn" id="scanbtn-${id}" onclick="triggerScan(${id})">
-      📷 Escanear etiqueta nutricional
+      ${t('food.scan')}
     </button>
     <div id="catalog-${id}" style="margin-top:4px"></div>
     <div class="row">
       <div class="form-group" style="flex:1.2">
-        <label>Cantidad (g)</label>
+        <label>${t('food.amount')}</label>
         <input type="number" id="fa-${id}" placeholder="100" min="0" oninput="recalcFood(${id})" style="text-align:center">
       </div>
       <div class="form-group" style="flex:1">
@@ -984,7 +1147,7 @@ function addFoodRow() {
         <input type="number" id="ff-${id}" placeholder="0" min="0" step="0.1" oninput="updateMealTotals()" style="text-align:center">
       </div>
     </div>
-    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:4px" onclick="saveRowToCatalog(${id})">💾 Guardar en catálogo</button>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:4px" onclick="saveRowToCatalog(${id})">${t('food.save.cat')}</button>
   `;
   document.getElementById('foods-list').appendChild(div);
   document.getElementById('fa-'+id).value = 100;
@@ -1062,7 +1225,7 @@ function saveMeal() {
   closeModal('meal-modal');
   renderNutritionPage();
   renderDashboard();
-  showToast('¡Comida registrada! 🥗');
+  showToast(t('toast.meal'));
 }
 
 // ─── SCAN FOOD LABEL ─────────────────────────────────────────────────────────
@@ -1180,7 +1343,7 @@ function renderHistoryPage() {
 
   const container = document.getElementById('history-list');
   if (!items.length) {
-    container.innerHTML = `<div class="empty"><div class="empty-icon">📊</div><div class="empty-title">Sin registros aún</div><div class="empty-sub">Empieza a entrenar y comer bien</div></div>`;
+    container.innerHTML = `<div class="empty"><div class="empty-icon">📊</div><div class="empty-title">${t('empty.history.title')}</div><div class="empty-sub">${t('empty.history.sub')}</div></div>`;
     return;
   }
 
@@ -1240,8 +1403,9 @@ function loadProfile() {
   document.getElementById('pf-goal').value = p.goal||'maintain';
   document.getElementById('pf-apikey').value = p.apikey||'';
   document.getElementById('profile-name-display').textContent = p.name || 'Mi Perfil';
-  const goalText = {loss:'Perder grasa', maintain:'Mantenimiento', gain:'Ganar músculo'};
+  const goalText = {loss:t('pf.goal.loss'), maintain:t('pf.goal.maintain'), gain:t('pf.goal.gain')};
   document.getElementById('profile-stats-display').textContent = `${p.weight ? p.weight+'kg · ':''} ${goalText[p.goal]||''}`;
+  applyLang();
 }
 
 function saveProfile() {
@@ -1263,7 +1427,7 @@ function saveProfile() {
   const saved = DB.set('profile', p);
   try { applyPhotoBg(p.name); } catch(e) { console.warn(e); }
   loadProfile();
-  if (saved) showToast('Perfil guardado ✓');
+  if (saved) showToast(t('toast.profile'));
 }
 
 async function testApiKey() {
@@ -1376,8 +1540,8 @@ function initChat() {
   if (chatReady) return;
   chatReady = true;
   const p = getProfile();
-  const greeting = p.name ? `¡Hola ${p.name}!` : '¡Hola!';
-  appendChatBubble('ai', `${greeting} 👋 Soy tu asistente de fitness y nutrición. Puedo ayudarte con:\n\n• **Recetas** según los alimentos que tengas\n• **Consejos de entrenamiento** y ejercicios\n• **Dudas sobre nutrición** y macros\n• **Planificación** de comidas o rutinas\n\nToca el botón 📊 para enviarme tu resumen del día y te doy recomendaciones personalizadas.`);
+  const greeting = p.name ? `${t('chat.greet')} ${p.name}!` : `${t('chat.greet')}!`;
+  appendChatBubble('ai', `${greeting} 👋 ${t('chat.greet.body')}`);
 }
 
 function appendChatBubble(role, text) {
@@ -1529,7 +1693,11 @@ function sendChatContext() {
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
 applyPhotoBg(getProfile().name);
+applyLang();
 renderDashboard();
 </script>
 </body>
