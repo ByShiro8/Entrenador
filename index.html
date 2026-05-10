@@ -552,11 +552,54 @@ function getWeekDates() {
   return Array.from({length:7}, (_,i) => { const x = new Date(mon); x.setDate(mon.getDate()+i); return x.toISOString().slice(0,10); });
 }
 
-function getProfile() { return DB.get('profile') || { name:'', age:'', sex:'M', weight:'', height:'', kcal:2000, prot:150, carb:200, fat:65, goal:'maintain' }; }
+const DEFAULT_API_KEY = 'AIzaSyA4wFQbX5isde3HRGXk7PQKXTqjgJhDgpE';
+function getProfile() { const p = DB.get('profile') || {}; return { name:'', age:'', sex:'M', weight:'', height:'', kcal:2000, prot:150, carb:200, fat:65, goal:'maintain', ...p, apikey: p.apikey || DEFAULT_API_KEY }; }
 function getWorkouts() { return DB.get('workouts') || []; }
 function getMeals() { return DB.get('meals') || []; }
 function saveWorkouts(d) { DB.set('workouts', d); }
 function saveMeals(d) { DB.set('meals', d); }
+
+// ─── FOOD CATALOG ─────────────────────────────────────────────────────────────
+function getFoodCatalog() { return DB.get('foodCatalog') || []; }
+function saveFoodCatalog(c) { DB.set('foodCatalog', c); }
+function addToCatalog(name, kcal, prot, carb, fat) {
+  if (!name) return;
+  const c = getFoodCatalog();
+  if (!c.find(f => f.name.toLowerCase() === name.toLowerCase())) {
+    c.unshift({ id: Date.now(), name, kcal, prot, carb, fat });
+    saveFoodCatalog(c);
+  }
+}
+function removeFoodFromCatalog(fid) {
+  saveFoodCatalog(getFoodCatalog().filter(f => f.id !== fid));
+  document.querySelectorAll('[id^="catalog-"]').forEach(el => renderCatalogSection(el.id.replace('catalog-','')));
+}
+function renderCatalogSection(id) {
+  const el = document.getElementById('catalog-'+id);
+  if (!el) return;
+  const catalog = getFoodCatalog();
+  if (!catalog.length) {
+    el.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:6px 0 10px">📷 Escanea productos para guardarlos aquí</div>';
+    return;
+  }
+  el.innerHTML = '<div class="scroll-x" style="margin-bottom:8px">' +
+    catalog.map(f => `<div class="quick-card" style="position:relative;padding-top:18px" onclick="fillFood(${id},'${f.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',${f.kcal},${f.prot},${f.carb},${f.fat},true)"><button onclick="event.stopPropagation();removeFoodFromCatalog(${f.id})" style="position:absolute;top:4px;right:6px;background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:2px;line-height:1">✕</button><div class="quick-card-name">${f.name}</div><div class="quick-card-sub">${Math.round(f.kcal)} kcal/100g</div></div>`).join('') +
+  '</div>';
+}
+function saveRowToCatalog(id) {
+  const name = document.getElementById('fn-'+id).value.trim();
+  if (!name) { showToast('Escribe el nombre del alimento primero'); return; }
+  const c = getFoodCatalog();
+  if (c.find(f => f.name.toLowerCase() === name.toLowerCase())) { showToast('⚠️ Ya está en el catálogo'); return; }
+  const b = foodBases[id];
+  const kcal = b ? b.kcal : (+document.getElementById('fk-'+id).value || 0);
+  const prot = b ? b.prot : (+document.getElementById('fp-'+id).value || 0);
+  const carb = b ? b.carb : (+document.getElementById('fc-'+id).value || 0);
+  const fat  = b ? b.fat  : (+document.getElementById('ff-'+id).value || 0);
+  addToCatalog(name, kcal, prot, carb, fat);
+  document.querySelectorAll('[id^="catalog-"]').forEach(el => renderCatalogSection(el.id.replace('catalog-','')));
+  showToast('✅ Guardado en catálogo');
+}
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
 function switchPage(id) {
@@ -863,21 +906,6 @@ function openMealModal() {
 let foodIdx = 0;
 function addFoodRow() {
   const id = foodIdx++;
-
-  // Quick foods database
-  const quickFoods = [
-    {name:'Pollo pechuga',kcal:165,prot:31,carb:0,fat:3.6,per100:true},
-    {name:'Arroz cocido',kcal:130,prot:2.7,carb:28,fat:0.3,per100:true},
-    {name:'Huevo L',kcal:72,prot:6,carb:0.4,fat:5,per100:false},
-    {name:'Atún lata',kcal:120,prot:26,carb:0,fat:1,per100:true},
-    {name:'Avena',kcal:370,prot:13,carb:60,fat:7,per100:true},
-    {name:'Leche desnatada',kcal:34,prot:3.4,carb:4.8,fat:0.1,per100:true},
-    {name:'Plátano',kcal:89,prot:1.1,carb:23,fat:0.3,per100:true},
-    {name:'Queso fresco 0%',kcal:68,prot:12,carb:3.2,fat:0.2,per100:true},
-    {name:'Aceite oliva',kcal:884,prot:0,carb:0,fat:100,per100:true},
-    {name:'Pan integral',kcal:240,prot:8,carb:44,fat:3.4,per100:true},
-  ];
-
   const div = document.createElement('div');
   div.id = 'food-row-'+id;
   div.style.cssText = 'background:var(--surface2);border-radius:12px;padding:12px;margin-bottom:8px;';
@@ -891,22 +919,10 @@ function addFoodRow() {
     <button class="scan-btn" id="scanbtn-${id}" onclick="triggerScan(${id})">
       📷 Escanear etiqueta nutricional
     </button>
-    <div id="nokey-${id}" style="display:none;background:rgba(99,102,241,.08);border:1.5px solid var(--accent);border-radius:12px;padding:14px;margin-bottom:10px">
-      <div style="font-weight:700;font-size:14px;margin-bottom:6px">🔑 Configura tu clave de Gemini (gratis)</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">Necesitas una clave gratuita de Google para leer etiquetas con la cámara.</div>
-      <a href="https://aistudio.google.com/apikey" target="_blank" class="btn btn-primary btn-full" style="margin-bottom:10px;text-decoration:none;display:flex">🌐 Obtener clave gratis en Google AI Studio</a>
-      <label style="margin-bottom:6px">Pega tu clave aquí</label>
-      <div style="display:flex;gap:8px">
-        <input type="password" id="inline-key-${id}" placeholder="AIza..." style="flex:1;font-size:13px">
-        <button class="btn btn-success" onclick="saveInlineKey(${id})">Guardar</button>
-      </div>
-    </div>
-    <div class="scroll-x" style="margin-bottom:8px">
-      ${quickFoods.map(f => `<div class="quick-card" onclick="fillFood(${id},'${f.name}',${f.kcal},${f.prot},${f.carb},${f.fat},${f.per100})"><div class="quick-card-name">${f.name}</div><div class="quick-card-sub">${f.kcal} kcal${f.per100?'/100g':'/ud'}</div></div>`).join('')}
-    </div>
+    <div id="catalog-${id}" style="margin-top:4px"></div>
     <div class="row">
       <div class="form-group" style="flex:1.2">
-        <label>Cantidad (g/ud)</label>
+        <label>Cantidad (g)</label>
         <input type="number" id="fa-${id}" placeholder="100" min="0" oninput="recalcFood(${id})" style="text-align:center">
       </div>
       <div class="form-group" style="flex:1">
@@ -928,10 +944,11 @@ function addFoodRow() {
         <input type="number" id="ff-${id}" placeholder="0" min="0" step="0.1" oninput="updateMealTotals()" style="text-align:center">
       </div>
     </div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:4px" onclick="saveRowToCatalog(${id})">💾 Guardar en catálogo</button>
   `;
   document.getElementById('foods-list').appendChild(div);
-  // default amount
   document.getElementById('fa-'+id).value = 100;
+  renderCatalogSection(id);
 }
 
 // Store base macros per 100g for recalc
@@ -1010,30 +1027,12 @@ function saveMeal() {
 
 // ─── SCAN FOOD LABEL ─────────────────────────────────────────────────────────
 function triggerScan(id) {
-  const apikey = getProfile().apikey;
-  if (!apikey) {
-    document.getElementById('nokey-'+id).style.display = 'block';
-    document.getElementById('scanbtn-'+id).style.display = 'none';
-    return;
-  }
   document.getElementById('cam-'+id).click();
-}
-
-function saveInlineKey(id) {
-  const key = document.getElementById('inline-key-'+id).value.trim();
-  if (!key) { showToast('Introduce la clave primero'); return; }
-  const p = getProfile();
-  p.apikey = key;
-  DB.set('profile', p);
-  document.getElementById('nokey-'+id).style.display = 'none';
-  document.getElementById('scanbtn-'+id).style.display = 'flex';
-  showToast('✅ Clave guardada. Ahora pulsa el botón de cámara.');
 }
 
 async function scanFoodLabel(id, file) {
   if (!file) return;
   const apikey = getProfile().apikey;
-  if (!apikey) { triggerScan(id); return; }
 
   const preview = document.getElementById('preview-'+id);
   preview.src = URL.createObjectURL(file);
@@ -1056,7 +1055,7 @@ async function scanFoodLabel(id, file) {
     };
 
     const profile2 = getProfile();
-    const model = profile2._model || 'gemini-1.5-flash';
+    const model = profile2._model || 'gemini-2.5-flash';
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apikey}`, {
       method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body)
     });
@@ -1073,15 +1072,28 @@ async function scanFoodLabel(id, file) {
 
     if (json.error) { showToast('⚠️ No se pudo leer la etiqueta, rellena manualmente'); }
     else {
+      const qty = json.cantidad || 100;
+      // Normalise everything to per-100g for the foodBases (so recalcFood works)
+      const per100 = {
+        kcal: (json.kcal || 0) * 100 / qty,
+        prot: (json.prot || 0) * 100 / qty,
+        carb: (json.carb || 0) * 100 / qty,
+        fat:  (json.fat  || 0) * 100 / qty,
+      };
+      foodBases[id] = per100;
       document.getElementById('fn-'+id).value = json.nombre || '';
-      document.getElementById('fa-'+id).value = json.cantidad || 100;
+      document.getElementById('fa-'+id).value = qty;
       document.getElementById('fk-'+id).value = Math.round(json.kcal || 0);
       document.getElementById('fp-'+id).value = parseFloat(json.prot || 0).toFixed(1);
       document.getElementById('fc-'+id).value = parseFloat(json.carb || 0).toFixed(1);
       document.getElementById('ff-'+id).value = parseFloat(json.fat || 0).toFixed(1);
-      foodBases[id] = { kcal: json.kcal||0, prot: json.prot||0, carb: json.carb||0, fat: json.fat||0 };
       updateMealTotals();
-      showToast('✅ Etiqueta leída');
+      // Auto-save to catalog (per 100g)
+      if (json.nombre) {
+        addToCatalog(json.nombre, per100.kcal, per100.prot, per100.carb, per100.fat);
+        document.querySelectorAll('[id^="catalog-"]').forEach(el => renderCatalogSection(el.id.replace('catalog-','')));
+      }
+      showToast('✅ Etiqueta leída y guardada en catálogo');
     }
   } catch(e) {
     showToast('❌ ' + e.message);
